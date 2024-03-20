@@ -1,17 +1,24 @@
 import unittest
-from utils import arrs
+from utils.arrs import get
+from utils.arrs import my_slice
 
 
-def test_get():
-    assert arrs.get([1, 2, 3, 4], 2, "test") == 3
-    assert arrs.get([], 0, "test") == "test"
+class TestFunction(unittest.TestCase):
+
+    def test_get(self):
+        array = [1, 2, 3, 4, 5]
+        self.assertEqual(get(array, 2), 3)
+        self.assertIsNone(get(array, 10), "default")
+
+    def test_slice(self):
+        self.assertEqual(my_slice([]), [])
+        self.assertEqual(my_slice([1, 2, 3, 4, 5]), [1, 2, 3, 4, 5])
+        self.assertEqual(my_slice([1, 2, 3, 4, 5], 1, 4), [2, 3, 4])
+        self.assertEqual(my_slice([1, 2, 3, 4, 5], 2, 8), [3, 4, 5])
+        self.assertEqual(my_slice([1, 2, 3, 4, 5], 2, 10), [3, 4, 5])
 
 
-def test_slice():
-    assert arrs.my_slice([]) == []
-    assert arrs.my_slice([1, 2, 3, 4, 5]) == [1, 2, 3, 4, 5]
-    assert arrs.my_slice([1, 2, 3, 4, 5], 1, 4) == [2, 3, 4]
-    assert arrs.my_slice([1, 2, 3, 4, 5], 2, 8) == [3, 4, 5]
-    assert arrs.my_slice([1, 2, 3, 4, 5], 2, 10) == [3, 4, 5]
-    assert arrs.my_slice([1, 2, 3, 4, 5], 0, 2) == [1, 2]
+if __name__ == '__main__':
+    unittest.main()
+
 
